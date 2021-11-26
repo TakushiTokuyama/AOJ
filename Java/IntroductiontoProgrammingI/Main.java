@@ -195,9 +195,16 @@ class Main {
             throw new UncheckedIOException(e);
         }
 
-        if (0 <= x - r && x + r < W ) {
+        // 4つのパターンに分ける
+        if ((0 < x && 0 < y) && (x + r <= W && y + r <= H)) {
             System.out.println("Yes");
-        }else{
+        } else if ((x < 0 && 0 < y) && (W <= x - r && y + r <= H)) {
+            System.out.println("Yes");
+        } else if ((x < 0 && y < 0) && (x + r <= W && H <= y - r)) {
+            System.out.println("Yes");
+        } else if ((0 < x && y < 0) && (W <= x - r && H <= y - r)) {
+            System.out.println("Yes");
+        } else {
             System.out.println("No");
         }
     }
