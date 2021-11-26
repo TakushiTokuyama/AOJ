@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
 import java.util.Arrays;
+import java.util.Scanner;
 
 class Main {
     public static void main(String[] args) {
@@ -15,7 +16,9 @@ class Main {
         // SmallLargeorEqual();
         // range();
         // SortingThreeNumbers();
-        CircleinaRectangle();
+        // CircleinaRectangle();
+        // PrintManyHelloWorld();
+        PrintTestCases();
     }
 
     private static void HelloWorld() {
@@ -206,6 +209,27 @@ class Main {
             System.out.println("Yes");
         } else {
             System.out.println("No");
+        }
+    }
+
+    private static void PrintManyHelloWorld() {
+        for (int i = 0; i < 1000; i++) {
+            System.out.println("Hello World");
+        }
+    }
+
+    private static void PrintTestCases() {
+        Scanner scan = new Scanner(System.in);
+
+        int i = 1;
+        int x = 1;
+
+        while (true) {
+            x = scan.nextInt();
+            if(x == 0){
+                break;
+            }
+            System.out.println("Case " + i++ + ": " + x);
         }
     }
 }
