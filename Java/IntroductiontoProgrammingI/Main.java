@@ -18,7 +18,9 @@ class Main {
         // SortingThreeNumbers();
         // CircleinaRectangle();
         // PrintManyHelloWorld();
-        PrintTestCases();
+        // PrintTestCases();
+        // SwappingTwoNumbers();
+        HowManyDivisors();
     }
 
     private static void HelloWorld() {
@@ -226,10 +228,55 @@ class Main {
 
         while (true) {
             x = scan.nextInt();
-            if(x == 0){
+            if (x == 0) {
                 break;
             }
             System.out.println("Case " + i++ + ": " + x);
         }
+    }
+
+    private static void SwappingTwoNumbers() {
+        Scanner scan = new Scanner(System.in);
+
+        while (true) {
+            String line = scan.nextLine();
+
+            String[] strs = line.split(" ");
+
+            if (strs[0].equals("0") && strs[1].equals("0")) {
+                break;
+            }
+
+            if (Integer.parseInt(strs[0]) < Integer.parseInt(strs[1])) {
+                System.out.println(strs[0] + " " + strs[1]);
+            } else {
+                System.out.println(strs[1] + " " + strs[0]);
+            }
+        }
+    }
+
+    private static void HowManyDivisors() {
+        Scanner scan = new Scanner(System.in);
+
+        String line = scan.nextLine();
+
+        String[] strs = line.split(" ");
+
+        int a = Integer.parseInt(strs[0]);
+
+        int b = Integer.parseInt(strs[1]);
+
+        int c = Integer.parseInt(strs[2]);
+
+        int answer = 0;
+
+        while (a <= b) {
+            if (c % a == 0) {
+                answer++;
+            }
+            a++;
+        }
+
+        System.out.println(answer);
     }
 }
