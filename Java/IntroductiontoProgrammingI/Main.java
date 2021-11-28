@@ -20,7 +20,10 @@ class Main {
         // PrintManyHelloWorld();
         // PrintTestCases();
         // SwappingTwoNumbers();
-        HowManyDivisors();
+        // HowManyDivisors();
+        // ABProblem();
+        // Circle();
+        SimpleCalculator();
     }
 
     private static void HelloWorld() {
@@ -278,5 +281,64 @@ class Main {
         }
 
         System.out.println(answer);
+    }
+
+    private static void ABProblem() {
+        Scanner scan = new Scanner(System.in);
+
+        String line = scan.nextLine();
+
+        String[] strs = line.split(" ");
+
+        int a = Integer.parseInt(strs[0]);
+
+        int b = Integer.parseInt(strs[1]);
+
+        // 浮動小数点数の扱いに注意　型変換を行う
+        System.out.println(a / b + " " + a % b + " " + String.format("%.8f", ((double) a / (double) b)));
+    }
+
+    private static void Circle() {
+        Scanner scan = new Scanner(System.in);
+
+        double r = scan.nextDouble();
+
+        // 面積:半径 * 半径 * 3.14 周:直径 * 3.14
+        System.out.println(
+                String.format("%.6f", r * r * 3.141592653589) + " " + String.format("%.6f", 2 * r * 3.141592653589));
+    }
+
+    private static void SimpleCalculator() {
+        Scanner scan = new Scanner(System.in);
+
+        while (true) {
+            String line = scan.nextLine();
+            String[] strs = line.split(" ");
+
+            int a = Integer.parseInt(strs[0]);
+            int b = Integer.parseInt(strs[2]);
+
+            String op = strs[1];
+
+            if (op.equals("?")) {
+                break;
+            }
+
+            if (op.equals("+")) {
+                System.out.println(a + b);
+            }
+
+            if (op.equals("-")) {
+                System.out.println(a - b);
+            }
+
+            if (op.equals("*")) {
+                System.out.println(a * b);
+            }
+
+            if (op.equals("/")) {
+                System.out.println(a / b);
+            }
+        }
     }
 }
