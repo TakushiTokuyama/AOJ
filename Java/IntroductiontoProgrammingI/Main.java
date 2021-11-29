@@ -23,7 +23,8 @@ class Main {
         // HowManyDivisors();
         // ABProblem();
         // Circle();
-        SimpleCalculator();
+        // SimpleCalculator();
+        MinMaxandSum();
     }
 
     private static void HelloWorld() {
@@ -294,7 +295,7 @@ class Main {
 
         int b = Integer.parseInt(strs[1]);
 
-        // 浮動小数点数の扱いに注意　型変換を行う
+        // 浮動小数点数の扱いに注意 型変換を行う
         System.out.println(a / b + " " + a % b + " " + String.format("%.8f", ((double) a / (double) b)));
     }
 
@@ -340,5 +341,28 @@ class Main {
                 System.out.println(a / b);
             }
         }
+    }
+
+    private static void MinMaxandSum() {
+        Scanner scan = new Scanner(System.in);
+
+        // n個の整数
+        int count = scan.nextInt();
+
+        int[] numbers = new int[count];
+
+        for (int i = 0; i < count; i++) {
+            numbers[i] = scan.nextInt();
+        }
+
+        Arrays.sort(numbers);
+
+        int total = 0;
+
+        for (int number : numbers) {
+            total += number;
+        }
+
+        System.out.println(numbers[0] + " " + numbers[count - 1] + " " + total);
     }
 }
