@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
+import java.nio.channels.NonWritableChannelException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -24,7 +26,8 @@ class Main {
         // ABProblem();
         // Circle();
         // SimpleCalculator();
-        MinMaxandSum();
+        // MinMaxandSum();
+        PrintaRectangle();
     }
 
     private static void HelloWorld() {
@@ -357,7 +360,7 @@ class Main {
 
         Arrays.sort(numbers);
 
-        int total = 0;
+        long total = 0;
 
         for (int number : numbers) {
             total += number;
@@ -365,4 +368,38 @@ class Main {
 
         System.out.println(numbers[0] + " " + numbers[count - 1] + " " + total);
     }
+
+    private static void PrintaRectangle() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        ArrayList<String> height_weight = new ArrayList<String>();
+
+        try {
+            while (true) {
+                String line = reader.readLine();
+                if (line.equals("0 0")) {
+                    break;
+                }
+                height_weight.add(line);
+            }
+            reader.close();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        String newline = System.lineSeparator();
+
+        for (String hw : height_weight) {
+            int h = Integer.parseInt(hw.split(" ")[0]);
+            int w = Integer.parseInt(hw.split(" ")[1]);
+            for (int i = 0; i < h; i++) {
+                for (int j = 0; j < w; j++) {
+                    System.out.print("#");
+                }
+                System.out.print(newline);
+            }
+            System.out.print(newline);
+        }
+    }
+
 }
