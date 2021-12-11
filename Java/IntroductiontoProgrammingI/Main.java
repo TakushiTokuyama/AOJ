@@ -28,7 +28,9 @@ class Main {
         // MinMaxandSum();
         // PrintaRectangle();
         // PrintaFrame();
-        PrintaChessboard();
+        // PrintaChessboard();
+        // StructuredProgramming();
+        ReversingNumbers();
     }
 
     private static void HelloWorld() {
@@ -480,6 +482,52 @@ class Main {
                 System.out.print(newline);
             }
             System.out.print(newline);
+        }
+    }
+
+    private static void StructuredProgramming() {
+        Scanner scan = new Scanner(System.in);
+
+        int n = scan.nextInt();
+
+        for (int i = 1; i <= n; i++) {
+            if (i % 3 == 0 || i % 10 == 3 || String.valueOf(i).contains("3")) {
+                System.out.print(" " + i);
+            }
+        }
+    }
+
+    private static void ReversingNumbers() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        String n;
+        Integer[] numbers;
+
+        try {
+            n = reader.readLine();
+            String line = reader.readLine();
+
+            numbers = new Integer[Integer.parseInt(n)];
+
+            String[] strs = line.split(" ");
+
+            for (int i = 0; i < strs.length; i++) {
+                numbers[i] = Integer.parseInt(strs[i]);
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        for (int i = Integer.parseInt(n) - 1; 0 <= i; i--) {
+            System.out.print(numbers[i]);
+
+            if (i != 0) {
+                System.out.print(" ");
+            }else if(i == 0){
+                System.out.println("");
+            }
         }
     }
 }
