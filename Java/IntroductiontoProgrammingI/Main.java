@@ -30,7 +30,8 @@ class Main {
         // PrintaFrame();
         // PrintaChessboard();
         // StructuredProgramming();
-        ReversingNumbers();
+        // ReversingNumbers();
+        FindingMissingCards();
     }
 
     private static void HelloWorld() {
@@ -525,9 +526,74 @@ class Main {
 
             if (i != 0) {
                 System.out.print(" ");
-            }else if(i == 0){
+            } else if (i == 0) {
                 System.out.println("");
             }
         }
+    }
+
+    private static void FindingMissingCards() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        String[][] input_cards;
+
+        int n;
+
+        try {
+            String str_n = reader.readLine();
+
+            n = Integer.parseInt(str_n);
+
+            input_cards = new String[n][2];
+
+            for (int i = 0; i < n; i++) {
+                String line = reader.readLine();
+
+                String[] strs = line.split(" ");
+
+                input_cards[i][0] = strs[0];
+                input_cards[i][1] = strs[1];
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        int output_cards[][] = new int[4][14];
+
+        // S,H,C,D
+        for (int i = 0; i < n; i++) {
+            int number = Integer.parseInt(input_cards[i][1]);
+            if (input_cards[i][0].equals("S")) {
+                output_cards[0][number] = number;
+            } else if (input_cards[i][0].equals("H")) {
+                output_cards[1][number] = number;
+            } else if (input_cards[i][0].equals("C")) {
+                output_cards[2][number] = number;
+            } else if (input_cards[i][0].equals("D")) {
+                output_cards[3][number] = number;
+            }
+        }
+
+        String s = "";
+
+        for (int i = 0; i < 4; i++) {
+            if (i == 0) {
+                s = "S";
+            } else if (i == 1) {
+                s = "H";
+            } else if (i == 2) {
+                s = "C";
+            } else if (i == 3) {
+                s = "D";
+            }
+            for (int j = 1; j <= 13; j++) {
+                if (output_cards[i][j] == 0) {
+                    System.out.println(s + " " + j);
+                }
+            }
+        }
+
     }
 }
