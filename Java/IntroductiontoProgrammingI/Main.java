@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
+import java.nio.channels.DatagramChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -31,7 +32,8 @@ class Main {
         // PrintaChessboard();
         // StructuredProgramming();
         // ReversingNumbers();
-        FindingMissingCards();
+        // FindingMissingCards();
+        OfficialHouse();
     }
 
     private static void HelloWorld() {
@@ -594,6 +596,62 @@ class Main {
                 }
             }
         }
+    }
 
+    private static void OfficialHouse() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        // b, f, r, v
+        String[] input;
+
+        // 区切り
+        final String delimiter = "####################";
+
+        try {
+            String str = reader.readLine();
+
+            int n = Integer.parseInt(str);
+
+            input = new String[n];
+
+            for (int i = 0; i < n; i++) {
+                String line = reader.readLine();
+                input[i] = line;
+            }
+
+            reader.close();
+        } catch (
+
+        IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        // 4棟 ３階 10部屋
+        int[][][] output = new int[4][3][10];
+
+        for (int i = 0; i < input.length; i++) {
+
+            String[] schoolBuildingInfo = input[i].split(" ");
+
+            int Mune = Integer.parseInt(schoolBuildingInfo[0]) - 1 ;
+
+            int floor = Integer.parseInt(schoolBuildingInfo[1]) - 1;
+
+            int room = Integer.parseInt(schoolBuildingInfo[2]) - 1 ;
+
+            int retirement = Integer.parseInt(schoolBuildingInfo[3]);
+
+            output[Mune][floor][room] += retirement;
+        }
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 10; k++) {
+                    System.out.print(" ");
+                    System.out.print(output[i][j][k]);
+                }
+                System.out.println("");
+            }
+            System.out.println(delimiter);
+        }
     }
 }
