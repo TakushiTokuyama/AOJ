@@ -4,9 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UncheckedIOException;
-import java.nio.channels.DatagramChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 class Main {
@@ -33,7 +33,9 @@ class Main {
         // StructuredProgramming();
         // ReversingNumbers();
         // FindingMissingCards();
-        OfficialHouse();
+        // OfficialHouse();
+        // MatrixVectorMultiplication();
+        Grading();
     }
 
     private static void HelloWorld() {
@@ -619,9 +621,7 @@ class Main {
             }
 
             reader.close();
-        } catch (
-
-        IOException e) {
+        } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
 
@@ -632,11 +632,11 @@ class Main {
 
             String[] schoolBuildingInfo = input[i].split(" ");
 
-            int Mune = Integer.parseInt(schoolBuildingInfo[0]) - 1 ;
+            int Mune = Integer.parseInt(schoolBuildingInfo[0]) - 1;
 
             int floor = Integer.parseInt(schoolBuildingInfo[1]) - 1;
 
-            int room = Integer.parseInt(schoolBuildingInfo[2]) - 1 ;
+            int room = Integer.parseInt(schoolBuildingInfo[2]) - 1;
 
             int retirement = Integer.parseInt(schoolBuildingInfo[3]);
 
@@ -651,7 +651,103 @@ class Main {
                 }
                 System.out.println("");
             }
-            System.out.println(delimiter);
+            if (i != 3) {
+                System.out.println(delimiter);
+            }
+        }
+    }
+
+    private static void MatrixVectorMultiplication() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        // n行 m列
+        int n, m;
+
+        int[][] a;
+        int[] b;
+
+        try {
+            String str = reader.readLine();
+
+            String[] nm = str.split(" ");
+
+            n = Integer.parseInt(nm[0]);
+            m = Integer.parseInt(nm[1]);
+
+            a = new int[n][m];
+
+            for (int i = 0; i < n; i++) {
+                String line = reader.readLine();
+                String[] strs = line.split(" ");
+                for (int j = 0; j < m; j++) {
+                    a[i][j] = Integer.parseInt(strs[j]);
+                }
+            }
+
+            b = new int[m];
+
+            for (int i = 0; i < m; i++) {
+                String line = reader.readLine();
+                b[i] = Integer.parseInt(line);
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        for (int i = 0; i < n; i++) {
+            var total = 0;
+            for (int j = 0; j < m; j++) {
+                total += a[i][j] * b[j];
+            }
+            System.out.println(total);
+        }
+    }
+
+    private static void Grading() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        // 中間試験の点数 m 期末試験の点数 f 再試験の点数 r
+        int m, f, r;
+
+        List<String> result = new ArrayList<String>();
+
+        try {
+            while (true) {
+                String str = reader.readLine();
+
+                String[] strs = str.split(" ");
+
+                m = Integer.parseInt(strs[0]);
+                f = Integer.parseInt(strs[1]);
+                r = Integer.parseInt(strs[2]);
+
+                if (m == -1 && f == -1 && r == -1) {
+                    result.forEach(i -> System.out.println(i));
+                    break;
+                }
+
+                if (m == -1 || f == -1) {
+                    result.add("F");
+                } else if (m + f >= 80) {
+                    result.add("A");
+                } else if (m + f >= 65) {
+                    result.add("B");
+                } else if (m + f >= 50) {
+                    result.add("C");
+                } else if (m + f >= 30 && r >= 50) {
+                    result.add("C");
+                } else if (m + f >= 30) {
+                    result.add("D");
+                } else {
+                    result.add("F");
+                }
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
         }
     }
 }
