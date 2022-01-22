@@ -37,7 +37,8 @@ class Main {
         // OfficialHouse();
         // MatrixVectorMultiplication();
         // Grading();
-        Howmanyways();
+        // Howmanyways();
+        Spreadsheet();
     }
 
     private static void HelloWorld() {
@@ -805,6 +806,70 @@ class Main {
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
+    }
 
+    private static void Spreadsheet() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        String[][] array;
+
+        int r, c;
+
+        try {
+            String rcs = reader.readLine();
+
+            String[] rc = rcs.split(" ");
+
+            r = Integer.parseInt(rc[0]);
+            c = Integer.parseInt(rc[1]);
+
+            array = new String[r][1];
+
+            for (int i = 0; i < r; i++) {
+                String line = reader.readLine();
+                String[] str_numbers = line.split(" ");
+
+                StringBuilder sb = new StringBuilder();
+                int total = 0;
+
+                for (int j = 0; j < c; j++) {
+                    sb.append(str_numbers[j] + " ");
+                    total += Integer.parseInt(str_numbers[j]);
+
+                    if (j == c - 1) {
+                        sb.append(total);
+                        array[i][0] = sb.toString();
+                        sb.setLength(0);
+                    }
+                }
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        int[] lastRow = new int[c + 1];
+
+        for (String[] arr : array) {
+            for (String str : arr) {
+                System.out.println(str);
+                String[] strs = str.split(" ");
+
+                for (int j = 0; j < strs.length; j++) {
+                    lastRow[j] += Integer.parseInt(strs[j]);
+                }
+            }
+        }
+
+        int k = 0;
+        for (int i : lastRow) {
+            k++;
+            if (lastRow.length == k) {
+                System.out.println(i);
+            } else {
+                System.out.print(i + " ");
+            }
+        }
     }
 }
