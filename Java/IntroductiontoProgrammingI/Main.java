@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 class Main {
     public static void main(String[] args) {
@@ -35,7 +36,8 @@ class Main {
         // FindingMissingCards();
         // OfficialHouse();
         // MatrixVectorMultiplication();
-        Grading();
+        // Grading();
+        Howmanyways();
     }
 
     private static void HelloWorld() {
@@ -749,5 +751,60 @@ class Main {
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
+    }
+
+    private static void Howmanyways() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        // 結果格納用
+        List<Integer> result = new ArrayList<Integer>();
+
+        int n, m;
+
+        try {
+            while (true) {
+                String line = reader.readLine();
+
+                String[] str = line.split(" ");
+
+                n = Integer.parseInt(str[0]);
+
+                m = Integer.parseInt(str[1]);
+
+                if (str[0].equals("0") && str[1].equals("0")) {
+                    result.forEach(i -> System.out.println(i));
+                    break;
+                }
+
+                List<String> list = new ArrayList<String>();
+
+                // 1 - n までの数の中から、合計がmの値を求める
+                for (int i = 1; i <= n; i++) {
+                    for (int j = 1; j <= n; j++) {
+                        for (int k = 1; k <= n; k++) {
+                            // 合計がm かつ 重複した組み合わせ以外
+                            if (m - (i + j + k) == 0 && !(i == j || i == k || j == k)) {
+                                int[] numbers = new int[3];
+                                numbers[0] = i;
+                                numbers[1] = j;
+                                numbers[2] = k;
+                                Arrays.sort(numbers);
+                                String number = String.valueOf(numbers[0]) + String.valueOf(numbers[1])
+                                        + String.valueOf(numbers[2]);
+                                list.add(number);
+                            }
+                        }
+                    }
+                }
+
+                // 重複を取り除いた組み合わせ
+                result.add(list.stream().distinct().collect(Collectors.toList()).size());
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
     }
 }
