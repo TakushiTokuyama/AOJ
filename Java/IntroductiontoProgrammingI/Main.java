@@ -38,7 +38,8 @@ class Main {
         // MatrixVectorMultiplication();
         // Grading();
         // Howmanyways();
-        Spreadsheet();
+        // Spreadsheet();
+        MatrixMultiplication();
     }
 
     private static void HelloWorld() {
@@ -870,6 +871,68 @@ class Main {
             } else {
                 System.out.print(i + " ");
             }
+        }
+    }
+
+    private static void MatrixMultiplication() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        // n,m,l
+        int[] nml;
+        long[][] nm;
+        long[][] ml;
+
+        try {
+
+            // n,m,l
+            String firstLine = reader.readLine();
+
+            nml = Arrays.stream(firstLine.split(" ")).mapToInt(i -> Integer.parseInt(i)).toArray();
+
+            // nm
+            nm = new long[nml[0]][nml[1]];
+
+            for (int i = 0; i < nml[0]; i++) {
+                String line = reader.readLine();
+                String[] n = line.split(" ");
+                for (int k = 0; k < nml[1]; k++) {
+                    nm[i][k] = Long.parseLong(n[k]);
+                }
+            }
+
+            // ml
+            ml = new long[nml[1]][nml[2]];
+
+            for (int i = 0; i < nml[1]; i++) {
+                String line = reader.readLine();
+                String[] m = line.split(" ");
+                for (int k = 0; k < nml[2]; k++) {
+                    ml[i][k] = Long.parseLong(m[k]);
+                }
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        String newline = System.lineSeparator();
+        int result = 0;
+
+        for (int i = 0; i < nm.length; i++) {
+            for (int k = 0; k < ml[0].length; k++) {
+                for (int l = 0; l < ml.length; l++) {
+                    result += nm[i][l] * ml[l][k];
+                }
+
+                System.out.print(result);
+
+                if (nml[2] - 1 != k) {
+                    System.out.print(" ");
+                }
+                result = 0;
+            }
+            System.out.print(newline);
         }
     }
 }
